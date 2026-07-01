@@ -1,6 +1,6 @@
 // --- Configuration ---
 const API_BASE_URL = '';
-const ENDPOINT = '/expenses/';
+const ENDPOINT = '/api/expenses/';
 
 // --- DOM Elements ---
 const form = document.getElementById('expense-form');

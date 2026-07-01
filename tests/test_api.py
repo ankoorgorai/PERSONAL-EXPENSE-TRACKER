@@ -17,7 +17,7 @@ class ExpenseApiTests(unittest.TestCase):
             "date": "2026-06-26",
         }
 
-        post_response = self.client.post("/expenses/", json=payload)
+        post_response = self.client.post("/api/expenses/", json=payload)
         self.assertEqual(post_response.status_code, 201)
 
         data = post_response.json()

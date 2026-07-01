@@ -59,14 +59,14 @@ class ExpenseOut(BaseModel):
 def root():
     return {"status": "API running"}
 
-@app.get("/expenses/", response_model=List[ExpenseOut])
+@app.get("/api/expenses/", response_model=List[ExpenseOut])
 def get_expenses():
     db = SessionLocal()
     expenses = db.query(ExpenseDB).all()
     db.close()
     return expenses
 
-@app.post("/expenses/", response_model=ExpenseOut, status_code=201)
+@app.post("/api/expenses/", response_model=ExpenseOut, status_code=201)
 def add_expense(expense: ExpenseIn):
     db = SessionLocal()
     new_expense = ExpenseDB(
@@ -81,7 +81,7 @@ def add_expense(expense: ExpenseIn):
     db.close()
     return new_expense
 
-@app.delete("/expenses/{expense_id}", status_code=204)
+@app.delete("/api/expenses/{expense_id}", status_code=204)
 def delete_expense(expense_id: int):
     db = SessionLocal()
     expense = db.query(ExpenseDB).filter(ExpenseDB.id == expense_id).first()
