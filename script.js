@@ -1,5 +1,5 @@
 // --- Configuration ---
-const API_BASE_URL = 'https://personal-expense-tracker-miw0.onrender.com';
+const API_BASE_URL = '';
 const ENDPOINT = '/expenses/';
 
 // --- DOM Elements ---

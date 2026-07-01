@@ -1,6 +1,7 @@
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List
 from sqlalchemy import create_engine, Column, Integer, String, Float, Date
@@ -44,14 +45,21 @@ class ExpenseIn(BaseModel):
     description: str = ""
     date: date
 
-class ExpenseOut(ExpenseIn):
+class ExpenseOut(BaseModel):
     id: int
+    amount: float
+    category: str
+    description: str = ""
+    date: date
+
     class Config:
         from_attributes = True
 
-@app.get("/")
+@app.get("/api")
 def root():
     return {"status": "API running"}
+
+app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
 @app.get("/expenses/", response_model=List[ExpenseOut])
 def get_expenses():
