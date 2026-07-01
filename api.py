@@ -59,8 +59,6 @@ class ExpenseOut(BaseModel):
 def root():
     return {"status": "API running"}
 
-app.mount("/", StaticFiles(directory=".", html=True), name="static")
-
 @app.get("/expenses/", response_model=List[ExpenseOut])
 def get_expenses():
     db = SessionLocal()
@@ -93,3 +91,5 @@ def delete_expense(expense_id: int):
     db.delete(expense)
     db.commit()
     db.close()
+
+app.mount("/", StaticFiles(directory=".", html=True), name="static")
